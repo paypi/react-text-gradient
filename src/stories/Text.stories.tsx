@@ -66,3 +66,19 @@ Teal.args = {
     radial: true,
   },
 };
+
+export const MultipleChildren: ComponentStory<typeof Text> = (args) => (
+  <Text {...args}>
+    <Inner>{args.children}</Inner>
+    <Inner>{args.children}</Inner>
+  </Text>
+);
+
+MultipleChildren.args = {
+  children: 'CHANGE THE WORLD, ONE LINE AT A TIME',
+  gradient: {
+    from: 'rgb(59 238 221)',
+    to: 'rgb(33 148 182)',
+    radial: true,
+  },
+};

@@ -19,12 +19,11 @@ export type Gradient = {
   degree?: number;
 };
 
-export type Props = {
-  children: any;
+export interface Props extends React.HTMLAttributes<HTMLDivElement> {
   gradient: Gradient;
   animateTo?: Gradient;
   animateDuration?: number;
-};
+}
 
 function gradientGenerator(g: Gradient): string {
   if (g.radial) {
@@ -35,10 +34,10 @@ function gradientGenerator(g: Gradient): string {
 }
 
 export default function Text({
-  children,
   gradient,
   animateTo,
   animateDuration,
+  ...props
 }: Props) {
   if (!gradient.degree) {
     gradient.degree = 90;
@@ -78,8 +77,9 @@ export default function Text({
 
   const styles = useSpring(springConfig);
   return (
-    <animated.div style={{ ...containerStyle, ...styles }}>
-      {children}
-    </animated.div>
+    <animated.div
+      {...props}
+      style={{ ...containerStyle, ...styles, ...props.style }}
+    />
   );
 }
