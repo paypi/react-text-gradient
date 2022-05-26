@@ -1,7 +1,7 @@
 {
   "name": "react-text-gradient",
   "version": "1.0.0",
-  "description": "An text gradient react component with multi-line aware animation",
+  "description": "A simple static or animated text gradient react component",
   "author": "Tom Emmerson",
   "license": "MIT",
   "devDependencies": {
