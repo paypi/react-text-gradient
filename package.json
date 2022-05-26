@@ -41,11 +41,13 @@
     "react-dom": "^18.1.0",
     "styled-components": "^5.3.5"
   },
-  "peerDependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+  "dependencies": {
     "styled-components": "^5.3.5",
     "react-spring": "^9.4.5"
+  },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "scripts": {
     "rollup": "rollup -c",
