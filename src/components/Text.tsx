@@ -9,7 +9,6 @@ const containerStyle = {
   display: 'inline-block',
   backgroundPositionX: 'right',
   backgroundPositionY: 'top',
-  backgroundSize: '150% 150%',
 };
 
 export type Gradient = {
@@ -53,10 +52,12 @@ export default function Text({
     from: {
       backgroundPosition: gradient.radial ? '0% 75%' : 'auto',
       backgroundImage: startGrad,
+      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
     },
     to: {
       backgroundPosition: gradient.radial ? '0% 75%' : 'auto',
       backgroundImage: startGrad,
+      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
     },
     config: {
       duration: animateDuration ?? 4000,
@@ -72,6 +73,7 @@ export default function Text({
         radial: animateTo.radial ?? gradient.radial,
       }),
       backgroundPosition: gradient.radial ? '100% 25%' : 'auto',
+      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
     };
   }
 
