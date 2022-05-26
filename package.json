@@ -1,6 +1,6 @@
 {
   "name": "@carefully-coded/react-text-gradient",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple static or animated text gradient react component",
   "author": "Tom Emmerson",
   "license": "MIT",
