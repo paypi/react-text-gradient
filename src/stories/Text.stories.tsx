@@ -30,7 +30,7 @@ Primary.args = {
     from: '#818CF8',
     to: '#5B21B6',
   },
-  animateTo: { degree: 270 },
+  animate: true,
 };
 
 export const Radial: ComponentStory<typeof Text> = (args) => (
@@ -44,11 +44,8 @@ Radial.args = {
   gradient: {
     from: '#818CF8',
     to: '#5B21B6',
-    radial: true,
   },
-  animateTo: {
-    degree: 270,
-  },
+  animate: true,
   animateDuration: 800,
 };
 
@@ -63,7 +60,6 @@ Teal.args = {
   gradient: {
     from: 'rgb(59 238 221)',
     to: 'rgb(33 148 182)',
-    radial: true,
   },
 };
 
@@ -79,6 +75,5 @@ MultipleChildren.args = {
   gradient: {
     from: 'rgb(59 238 221)',
     to: 'rgb(33 148 182)',
-    radial: true,
   },
 };

@@ -12,7 +12,7 @@ const containerStyle = {
 };
 
 export type Gradient = {
-  radial?: boolean;
+  type?: 'linear' | 'radial';
   from?: string;
   to?: string;
   degree?: number;
@@ -20,12 +20,13 @@ export type Gradient = {
 
 export interface Props extends React.HTMLAttributes<HTMLDivElement> {
   gradient: Gradient;
+  animate?: boolean;
   animateTo?: Gradient;
   animateDuration?: number;
 }
 
 function gradientGenerator(g: Gradient): string {
-  if (g.radial) {
+  if (g.type == 'radial') {
     return `radial-gradient(farthest-corner at top, ${g.from}, ${g.to})`;
   }
 
@@ -34,30 +35,50 @@ function gradientGenerator(g: Gradient): string {
 
 export default function Text({
   gradient,
+  animate,
   animateTo,
   animateDuration,
   ...props
 }: Props) {
-  if (!gradient.degree) {
+  if (gradient.degree == undefined) {
     gradient.degree = 90;
   }
-  if (gradient.radial == undefined) {
-    gradient.radial = true;
+  if (gradient.type == undefined) {
+    gradient.type = 'radial';
   }
 
+  if (animate && animateTo == undefined) {
+    animateTo = {
+      type: gradient.type,
+      to: gradient.from,
+      from: gradient.to,
+      degree: 360 - gradient.degree,
+    };
+  }
+
+  if (animateTo) {
+    if (animateTo.type == undefined) {
+      animateTo.type = 'radial';
+    }
+    if (gradient.type !== animateTo.type) {
+      throw new Error(
+        '@carefully-coded/react-text-gradient: cannot animate between linear and radial gradients'
+      );
+    }
+  }
   const startGrad = gradientGenerator(gradient);
 
   const springConfig = {
     loop: { reverse: true },
     from: {
-      backgroundPosition: gradient.radial ? '0% 75%' : 'auto',
+      backgroundPosition: gradient.type == 'radial' ? '0% 75%' : 'auto',
       backgroundImage: startGrad,
-      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
+      backgroundSize: gradient.type == 'radial' ? '150% 150%' : 'auto',
     },
     to: {
-      backgroundPosition: gradient.radial ? '0% 75%' : 'auto',
+      backgroundPosition: gradient.type == 'radial' ? '0% 75%' : 'auto',
       backgroundImage: startGrad,
-      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
+      backgroundSize: gradient.type == 'radial' ? '150% 150%' : 'auto',
     },
     config: {
       duration: animateDuration ?? 4000,
@@ -70,10 +91,10 @@ export default function Text({
         degree: animateTo.degree ?? gradient.degree,
         from: animateTo.from ?? gradient.from,
         to: animateTo.to ?? gradient.to,
-        radial: animateTo.radial ?? gradient.radial,
+        type: animateTo.type ?? gradient.type,
       }),
-      backgroundPosition: gradient.radial ? '100% 25%' : 'auto',
-      backgroundSize: gradient.radial ? '150% 150%' : 'auto',
+      backgroundPosition: gradient.type == 'radial' ? '100% 25%' : 'auto',
+      backgroundSize: gradient.type == 'radial' ? '150% 150%' : 'auto',
     };
   }
 
