@@ -57,7 +57,7 @@ export default function Text({
 
   if (animateTo) {
     if (animateTo.type == undefined) {
-      animateTo.type = 'radial';
+      animateTo.type = gradient.type;
     }
     if (gradient.type !== animateTo.type) {
       throw new Error(
