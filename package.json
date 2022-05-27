@@ -1,6 +1,6 @@
 {
   "name": "@carefully-coded/react-text-gradient",
-  "version": "1.0.3-beta.6",
+  "version": "1.0.5",
   "description": "A simple static or animated text gradient react component",
   "author": "Tom Emmerson",
   "license": "MIT",
@@ -51,7 +51,7 @@
   },
   "scripts": {
     "rollup": "rollup -c",
-    "publish": "yarn rollup && npm publish",
+    "make-public": "yarn test && yarn rollup && yarn publish",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest"
