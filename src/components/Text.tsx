@@ -52,7 +52,6 @@ export default function Text({
       type: gradient.type,
       to: gradient.from,
       from: gradient.to,
-      degree: 360 - gradient.degree,
     };
   }
 
