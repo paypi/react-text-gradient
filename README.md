@@ -27,9 +27,23 @@ import Text from 'react-text-gradient';
 ```
 
 ### Animated gradient text
-Add the `animateTo` prop to apply a gradient. The animation will automatically reverse when it finishes and continue in a loop. Make sure to not set the same
-prop for `animateTo` and `gradient` or you will animate between the same color (i.e nothing will happen)
+Use the `animateTo` prop to apply a specific gradient to animate to, or use `animate` to animate between the `from` and `to` positions of 
+the initial gradient. Make sure to not set the same prop for `animateTo` and `gradient` or you will animate between the same color (i.e nothing will happen)
 
+Animate between the `from` and `to` colors
+```TSX
+import Text from 'react-text-gradient';
+
+<Text 
+  gradient={{ from: '#818CF8', to: '#5B21B6' }} 
+  animate
+  animationDuration={4000}
+>
+  Some fancy animated text
+</Text>
+```
+
+Specific gradient to animate to:
 ```TSX
 import Text from 'react-text-gradient';
 
@@ -50,7 +64,7 @@ import Text from 'react-text-gradient';
 
 <Text 
   gradient={{ from: '#818CF8', to: '#5B21B6' }} 
-  animateTo={{ to: '#818CF8', from: '#5B21B6' }} 
+  animate
   animationDuration={4000}
 >
   <h1>Large gradient text</h1>
@@ -58,15 +72,15 @@ import Text from 'react-text-gradient';
 ```
 
 ### Linear gradient
-Gradients are radial by default (we think this looks better most of the time). Set `radial` to `false` to create a linear gradient. 
+Gradients are radial by default (we think this looks better most of the time). Set `type` to `linear` to create a linear gradient. 
 
 When adding a linear gradient, add a `degree` to pick what direction the gradient should be in - this defaults to `90`. 
 ```TSX
 import Text from 'react-text-gradient';
 
 <Text 
-  gradient={{ from: '#818CF8', to: '#5B21B6', radial: false, degree: 90 }} 
-  animateTo={{ to: '#818CF8', from: '#5B21B6', radial: false, degree: 120 }} 
+  gradient={{ from: '#818CF8', to: '#5B21B6', type: 'linear', degree: 90 }} 
+  animateTo={{ to: '#818CF8', from: '#5B21B6', degree: 120 }} 
   animationDuration={4000}
 >
 Some fancy text with a linear gradient
@@ -82,7 +96,7 @@ import Text from 'react-text-gradient';
 <Text 
   style={{fontSize: '20px'}}
   gradient={{ from: '#818CF8', to: '#5B21B6' }} 
-  animateTo={{ to: '#818CF8', from: '#5B21B6' }} 
+  animate
   animationDuration={4000}
 >
   Text with specific font size
@@ -93,7 +107,7 @@ import Text from 'react-text-gradient';
 
 ```Typescript
 type Gradient = {
-  radial?: boolean;
+  type?: 'linear' | 'radial';
   from?: string;
   to?: string;
   degree?: number;
@@ -101,6 +115,7 @@ type Gradient = {
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   gradient: Gradient;
+  animate?: Boolean;
   animateTo?: Gradient;
   animateDuration?: number;
 }
@@ -109,5 +124,6 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 | Prop Name   | Type        | Default       | Description       |
 | ---        |    ----   |   ----   |        --- |
 | `gradient`  | `Gradient`       | `undefined`   | Starting gradient |
+| `animate` | `Boolean` | `false` | Animate the gradient text by transitioning between `from` and `to` colors |
 | `animateTo`  | `Gradient`       | `undefined`   | Gradient to animate to |
 | `animateDuration`  | `number`       | `4000`   | Duration of animation in ms  |
