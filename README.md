@@ -1,6 +1,10 @@
 # React-Text-Gradient
 
+![Icon](https://react-text-gradient.carefully.codes/icon.svg)
+
 A simple React component for awesome, animated or static text gradients. 
+
+[Documentation + Examples](https://react-text-gradient.carefully.codes/)
 
 The library consists of a single component `Text` which when wrapped 
 around text or a component containing text applies a gradient to it.
